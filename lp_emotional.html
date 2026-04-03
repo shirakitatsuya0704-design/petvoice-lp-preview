@@ -90,18 +90,21 @@
       position: absolute; inset: 0;
       background-image: url('https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=1200&q=80');
       background-size: cover; background-position: center;
-      opacity: 0.1;
+      opacity: 0.42;
     }
     .hero__overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 60%, rgba(255,255,255,0.95) 100%);
+      background: linear-gradient(to bottom, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.38) 52%, rgba(255,255,255,0.93) 100%);
     }
     .hero__content {
       position: relative;
-      padding: 120px 28px 56px;
+      padding: 80px 28px 56px;
       max-width: 720px;
       margin: 0 auto;
       width: 100%;
+    }
+    @media (min-width: 640px) {
+      .hero__content { padding-top: 110px; }
     }
     /* Dog photo floating in hero */
     .hero__dog-wrap {
@@ -151,13 +154,15 @@
       display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 40px;
     }
     .hero__badge {
-      background: rgba(13,172,189,0.1);
-      border: 1px solid rgba(13,172,189,0.25);
+      background: var(--teal);
+      border: none;
       border-radius: 50px;
-      padding: 6px 16px;
-      font-size: 11px;
-      color: #333;
-      letter-spacing: 0.05em;
+      padding: 8px 18px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.04em;
+      box-shadow: 0 3px 12px rgba(13,172,189,0.4);
     }
     .hero__cta-wrap { display: flex; flex-direction: column; gap: 12px; }
     .btn-primary {
@@ -660,9 +665,10 @@
         「<em>苦しい</em>」って、<br>言えないんだよ。
       </h1>
       <p class="hero__sub">
-        ペットは言葉で苦しさを伝えられない。<br>
-        だから、PetVoiceが声を届ける。<br>
-        15の健康データで、24時間。
+        「なんか今日元気ないな」——そう思っても、<br>
+        確かめる方法がなかった。<br>
+        PetVoiceは、ペットの小さな「苦しい」を<br>
+        15のデータで、24時間かわりに届けます。
       </p>
       <div class="hero__badges">
         <span class="hero__badge">📖 オックスフォード大学医療誌掲載</span>
@@ -673,7 +679,7 @@
         <a href="https://order.petvoice.co.jp/items" class="btn-primary" target="_blank">
           月額980円〜 今すぐ注文する →
         </a>
-        <span class="hero__note">初期費用 初回限定50%オフ・1年間補償付き</span>
+        <span class="hero__note">初回限定 初期費用50%オフ・1年間補償付き・最短3分で注文完了</span>
       </div>
     </div>
     <div class="scroll-hint">
@@ -689,32 +695,32 @@
       <p class="section-label">The Problem</p>
       <p class="problem-lead">
         ペットは、<br>「苦しい」と言えない。<br>
-        <em>だから、気づけない。</em>
+        <em>だから、飼い主も気づけない。</em>
       </p>
       <p style="font-size:14px; color: rgba(255,255,255,0.85); line-height: 2; margin-bottom: 8px;">
-        どんな病気も、最初は「なんとなくいつもと違う気がする」という小さなサインから始まります。でも、私たちはその声を聞く術を持っていませんでした。
+        病気は、突然やってくるわけじゃない。最初は必ず、小さなサインがある。でも、ペットはそれを言葉にできない。だから気づいてあげられない——それが、一番つらい。
       </p>
 
       <div class="problem-cards">
         <div class="problem-card">
           <div class="problem-card__icon">😰</div>
           <div class="problem-card__text">
-            <strong>帰宅したら、ぐったりしていた</strong>
-            「外出中も元気にしてると思っていた。帰ったら様子がおかしくて、病院に連れて行ったら即入院でした」
+            <strong>仕事中もスマホが気になって、集中できなかった</strong>
+            「帰ったら様子がおかしくて、すぐ病院へ。即入院でした。あの罪悪感は、今も消えない」
           </div>
         </div>
         <div class="problem-card">
           <div class="problem-card__icon">😔</div>
           <div class="problem-card__text">
             <strong>「もう手遅れです」と言われた</strong>
-            「病院に連れて行ったときにはかなり進行していた。もっと早く気づけていたら、と今でも後悔しています」
+            「ずっとそばにいたのに、気づいてあげられなかった。もっと早く連れて行っていれば、と今でも後悔しています」
           </div>
         </div>
         <div class="problem-card">
           <div class="problem-card__icon">💔</div>
           <div class="problem-card__text">
-            <strong>苦しむ姿を見たくない</strong>
-            「できることはすべてやりたい。苦しんでいるのに気づいてあげられないのが、一番つらい」
+            <strong>苦しんでいるのに、気づいてあげられない</strong>
+            「できることは全部やりたい。なのに、声を聞く方法がなかった。それが一番つらかった」
           </div>
         </div>
       </div>
@@ -728,11 +734,11 @@
     <div class="container">
       <p class="section-label">Silent Signs</p>
       <h2 class="section-title disease-intro">
-        病気には、必ず<br>「前兆」がある。<br>
-        <span style="font-size:0.7em; color:#888;">気づけるかどうかの差だけ。</span>
+        病気は突然やってくるんじゃない。<br>必ず「前兆」がある。<br>
+        <span style="font-size:0.7em; color:#888;">あとは、気づけるかどうか。</span>
       </h2>
       <p class="section-desc">
-        心臓病・腎臓病・がん——多くの命を奪う病気は、発症前から体がサインを出しています。そのサインをデータで捉えることが、早期発見の第一歩です。
+        心臓病・腎臓病・がん——命を奪う病気ほど、発症よりずっと前から体はサインを出しています。そのかすかなサインをデータで捉えること。それが、「後悔しない飼い主」への第一歩です。
       </p>
 
       <div class="disease-cards">
@@ -743,10 +749,10 @@
           </div>
           <div class="disease-card__body">
             <p class="disease-card__problem">
-              外見では気づきにくく、お腹にしこりが出るまで発見できないことが多い。「動きで気づけなかった」という後悔の声が後を絶たない。
+              外見ではほぼ気づけない。しこりが出るまで発見できないことが多く、「動きが鈍くなって初めて気づいた」という後悔が後を絶たない。
             </p>
             <div class="disease-card__insight">
-              がんによる<strong>痛みは心拍数の上昇</strong>として現れる。活動量の変化も初期サインのひとつ。15項目のデータが揃えば、気づく機会は格段に増える。
+              がんの<strong>痛みは心拍数の上昇</strong>として先に現れる。活動量の変化も重要な初期サイン。毎日のデータがあれば、気づく機会は格段に増える。
             </div>
           </div>
         </div>
@@ -758,10 +764,10 @@
           </div>
           <div class="disease-card__body">
             <p class="disease-card__problem">
-              悪化のサインは「呼吸」に先に現れる。しかし飼い主が安静時の呼吸数を正確に測るのは非常に難しく、異変を見逃しがち。
+              悪化のサインは「呼吸」に先に現れるが、安静時の呼吸数を毎日正確に測るのは現実的に難しい。そのわずかな変化を見逃してしまうことで、手遅れになることも。
             </p>
             <div class="disease-card__insight">
-              <strong>安静時呼吸数の変化</strong>は、肺水腫の最大1週間前から現れる。早期発見で入院を回避できたケースが多数報告されている。
+              <strong>安静時呼吸数の変化</strong>は、肺水腫の最大1週間前から現れる。PetVoiceで早期発見し、入院を回避できたケースが多数報告されている。
             </div>
           </div>
         </div>
@@ -773,10 +779,10 @@
           </div>
           <div class="disease-card__body">
             <p class="disease-card__problem">
-              進行しても症状が出にくく、食欲がなくなって気づいた時には末期というケースも。急変して入院後2日で亡くなる例もある。
+              症状が出にくいため、食欲がなくなって気づいた時には末期、というケースが珍しくない。静かに進行する、もっとも気づきにくい病気のひとつ。
             </p>
             <div class="disease-card__insight">
-              <strong>活動量の低下・心拍の変化</strong>が最初のサイン。日々のデータを記録し続けることでしか、この静かな変化には気づけない。
+              最初のサインは<strong>活動量の低下・心拍の変化</strong>。この静かな変化に気づくには、毎日のデータを記録し続けるしかない。
             </div>
           </div>
         </div>
@@ -790,25 +796,25 @@
   <section class="section">
     <div class="container">
       <p class="section-label">Why It Matters</p>
-      <h2 class="section-title">早期発見が、<br>健康寿命を変える。</h2>
+      <h2 class="section-title">早期発見は、<br>「安心」じゃなく<br>「時間」を増やす。</h2>
       <p class="section-desc">
-        早期発見はただ「安心」のためだけじゃない。病気の進行スピードを抑え、治療の選択肢を広げ、一緒にいられる時間を延ばします。
+        早期発見は「気持ちが楽になる」だけじゃない。進行を遅らせ、治療の選択肢を広げ、一緒にいられる時間を具体的に延ばします。
       </p>
 
       <div class="bridge-stat-wrap">
         <div class="bridge-stat">
           <div class="bridge-stat__num">1週間</div>
-          <div class="bridge-stat__label">早く異変に気づけた<br>ケースが多数報告</div>
+          <div class="bridge-stat__label">早く異変に気づけた<br>ケースが多数報告されている</div>
         </div>
         <div class="bridge-divider"></div>
         <div class="bridge-stat">
           <div class="bridge-stat__num">24時間</div>
-          <div class="bridge-stat__label">あなたの代わりに<br>見守り続ける</div>
+          <div class="bridge-stat__label">眠っている間も、<br>外出中も、休まず見守る</div>
         </div>
         <div class="bridge-divider"></div>
         <div class="bridge-stat">
           <div class="bridge-stat__num">15項目</div>
-          <div class="bridge-stat__label">健康データを<br>同時にモニタリング</div>
+          <div class="bridge-stat__label">呼吸・心拍・体温など<br>同時にモニタリング</div>
         </div>
       </div>
 
@@ -831,11 +837,11 @@
       </div>
       <div class="product-name-wrap">
         <div class="product-name">PetVoice</div>
-        <div class="product-tagline">ペットの声を、データにする。スマート首輪型健康管理デバイス。</div>
+        <div class="product-tagline">ペットが言えない「苦しい」を、データで届ける。スマート首輪型健康管理デバイス。</div>
       </div>
 
       <p style="font-size:15px; font-family:'Noto Sans JP',sans-serif; font-weight:700; line-height:1.7; text-align:center; margin-bottom:24px;">
-        PetVoiceは、<br>15の健康データで、<br>ペットの声を届け続けます。
+        首輪を着けるだけ。<br>あとはPetVoiceが、休まず<br>ペットの体の声を届けます。
       </p>
 
       <div class="data-grid">
@@ -866,7 +872,7 @@
       </div>
 
       <p class="product-desc">
-        スマートフォンと同スペックのモーションセンサーで、呼吸の微細な動きを高精度に検出。外出先からスマホで確認でき、異変があれば即座にプッシュ通知。動物病院では入院管理にも活用されています。
+        スマートフォンと同等のセンサーが、眠っているペットの呼吸の微細な動きを高精度で捉え続けます。外出先でもスマホからリアルタイムに確認でき、異変があれば即通知。全国の動物病院でも入院管理に採用されるほどの計測精度です。
       </p>
 
       <div class="product-patent">
@@ -882,7 +888,7 @@
   <section class="section">
     <div class="container">
       <p class="section-label">How It Works</p>
-      <h2 class="section-title">仕事中も就寝中も、<br>ペットの声が届く。</h2>
+      <h2 class="section-title">離れていても、<br>繋がっている。</h2>
 
       <div class="feature-items">
         <div class="feature-item">
@@ -891,9 +897,9 @@
               alt="犬を見守る">
           </div>
           <div class="feature-item__label">Alert</div>
-          <h3 class="feature-item__title">「苦しい」サインを、<br>見逃さない通知</h3>
+          <h3 class="feature-item__title">「あの時すぐ病院に<br>行けばよかった」を、なくす。</h3>
           <p class="feature-item__desc">
-            呼吸数・心拍数が設定した基準を超えたとき、即座にスマホへアラートを通知。「帰宅したら手遅れだった」という最悪の事態を防ぎます。外出中も就寝中も、PetVoiceが休まず見張り続けます。
+            呼吸数・心拍数が変化したとき、スマホへ即アラート。仕事中でも、深夜でも、PetVoiceは休まず見守り続けます。「帰宅したら手遅れだった」という後悔を、防ぎます。
           </p>
         </div>
 
@@ -903,9 +909,9 @@
               alt="犬と獣医師">
           </div>
           <div class="feature-item__label">Vet Cooperation</div>
-          <h3 class="feature-item__title">「なんとなく」が<br>「確実なデータ」に変わる</h3>
+          <h3 class="feature-item__title">「なんとなく元気がない」が<br>「データで証明できる」に変わる</h3>
           <p class="feature-item__desc">
-            「なんか元気がない気がします」ではなく、「この3日間、安静時心拍数が平均より15%高い」というデータを獣医師に見せてください。データが治療を変えます。全国400病院と連携済み。
+            「なんか元気がない気がして……」だけでは、獣医師も判断できない。でも「この5日間、安静時心拍数が平均より15%高い」というデータを見せれば、話が変わります。あなたの「勘」を、証拠に変えます。全国400病院と連携済み。
           </p>
         </div>
       </div>
@@ -922,7 +928,7 @@
         声が届いたから、<br>助けられた命がある。
       </h2>
       <p style="font-size:14px; color:#444; line-height:2; margin-top:8px;">
-        PetVoiceを使い始めた飼い主さんたちの、リアルな体験。
+        みんな最初は「大げさかな」と思っていた。でも、データが命を救った。
       </p>
 
       <div class="testi-slider-wrap">
@@ -1030,8 +1036,8 @@
   <section class="section">
     <div class="container">
       <p class="section-label">Get Started</p>
-      <h2 class="section-title">今日から、<br>ペットの声を聞ける。</h2>
-      <p class="section-desc">導入が初めての方向けのセットをご用意しています。最短3分で注文完了。</p>
+      <h2 class="section-title">今日から、<br>「気づいてあげられる」<br>飼い主になれる。</h2>
+      <p class="section-desc">必要なものが全部セット。最短3分で注文完了。難しい設定は不要です。</p>
 
       <div class="price-card">
         <div class="price-card__header">
@@ -1051,11 +1057,11 @@
         </div>
         <div class="price-card__body">
           <ul class="price-features">
-            <li>首輪・端末・充電器など導入に必要なものが全て揃う完全セット</li>
-            <li>1年間交換・修理無料の補償付き（補償プランは+500円/月）</li>
-            <li>獣医師と連携できる病院データ共有機能付き</li>
+            <li>首輪・端末・充電器——導入に必要なものが全て揃ったスターターセット</li>
+            <li>1年間の交換・修理補償付き（補償プランは月額+500円）</li>
+            <li>計測データを獣医師と共有できる病院連携機能付き</li>
             <li>呼吸数・心拍数・体温など15項目を24時間自動記録</li>
-            <li>スマホへのプッシュ通知アラート機能</li>
+            <li>異変を即座にお知らせするスマホへのプッシュ通知アラート</li>
           </ul>
         </div>
         <div class="price-cta-wrap">
@@ -1077,12 +1083,12 @@
   <section class="closing">
     <div class="container">
       <h2 class="closing__title">
-        最後まで<em>苦しまず</em>に<br>いさせてあげたい。<br>
-        PetVoiceは飼い主さんの<br>その気持ちに、応えます。
+        「気づいてあげたい」——<br>
+        その気持ちに、<br>応えるために<em>PetVoice</em>はある。
       </h2>
       <p class="closing__sub">
-        月額980円〜。24時間、ペットの声を届け続けます。<br>
-        今日から、「気づいてあげられなかった」という後悔をなくしましょう。
+        月額980円〜。それだけで、24時間の安心が手に入ります。<br>
+        「あの時気づいてあげられていれば」——その後悔を、これ以上させたくないから。
       </p>
       <div class="closing__cta">
         <a href="https://order.petvoice.co.jp/items" class="btn-primary" target="_blank">
