@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PetVoice — ペットの声を、聞いてあげてほしい。</title>
+  <meta name="description" content="ペットは「苦しい」と言葉では言えない。PetVoiceは15の健康データで、ペットの声をあなたに届け続けます。">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=block" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+  <style>
+/* ════════════════════════════════════════
+   RESET & MATERIAL SYMBOLS
+════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+img { display: block; max-width: 100%; }
+a   { text-decoration: none; color: inherit; }
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal; font-style: normal;
+  font-size: 24px; line-height: 1; letter-spacing: normal;
+  text-transform: none; display: inline-block;
+  white-space: nowrap; word-wrap: normal; direction: ltr;
+  -webkit-font-smoothing: antialiased;
+}
+.icon-fill { font-variation-settings: 'FILL' 1, 'wght' 400, 'OPSZ' 24, 'GRAD' 0; }
+
+/* ════════════════════════════════════════
+   DESIGN TOKENS
+════════════════════════════════════════ */
+:root {
+  --teal:        #0dacbd;
+  --teal-dk:     #0a8fa0;
+  --teal-lt:     #e4f8fa;
+  --amber:       #fdaa31;
+  --amber-dk:    #e89510;
+  --amber-lt:    #fff4df;
+  --dark:        #0d1a26;
+  --dark-2:      #1e2e3e;
+  --text:        #1a2332;
+  --text-2:      #5a6473;
+  --line:        #e8edf2;
+  --white:       #ffffff;
+  --pad:         20px;
+  --r:           14px;
+  --r-lg:        20px;
+}
+
+/* ════════════════════════════════════════
+   APP WRAPPER  (480px phone on desktop)
+════════════════════════════════════════ */
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: #dde1e7;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+/* Subtle desktop background pattern */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 50%, rgba(13,172,189,.06) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 80% 50%, rgba(253,170,49,.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+.app-wrapper {
+  width: 100%;
+  max-width: 480px;
+  background: var(--white);
+  min-height: 100vh;
+  margin: 0 auto;
+  position: relative;
+  overflow-x: clip;
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,.06),
+    0 8px 32px rgba(0,0,0,.1),
+    0 32px 80px rgba(0,0,0,.14);
+}
+
+/* ════════════════════════════════════════
+   UTILITY
+════════════════════════════════════════ */
+.pad { padding-left: var(--pad); padding-right: var(--pad); }
+/* Full-bleed: overrides section padding for images */
+.bleed { width: 100%; display: block; }
+
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 10px; font-weight: 700; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--teal);
+  margin-bottom: 14px;
+}
+.eyebrow::before {
+  content: ''; display: block;
+  width: 20px; height: 2px; background: var(--teal); flex-shrink: 0;
+}
+.eyebrow--inv        { color: var(--amber); }
+.eyebrow--inv::before{ background: var(--amber); }
+.eyebrow--white      { color: rgba(255,255,255,.7); }
+.eyebrow--white::before { background: rgba(255,255,255,.5); }
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: 'Noto Sans JP', sans-serif; font-weight: 700;
+  border-radius: 50px; cursor: pointer; border: none;
+  transition: transform .15s, box-shadow .15s, background .2s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-amber {
+  background: var(--amber); color: #fff;
+  font-size: 16px; padding: 18px 32px;
+  box-shadow: 0 6px 24px rgba(253,170,49,.45);
+}
+.btn-amber:hover { background: var(--amber-dk); box-shadow: 0 10px 32px rgba(253,170,49,.5); }
+.btn-amber-full {
+  background: var(--amber); color: #fff;
+  font-size: 17px; padding: 20px 24px; width: 100%;
+  box-shadow: 0 6px 24px rgba(253,170,49,.45);
+}
+.btn-amber-full:hover { background: var(--amber-dk); }
+.btn-ghost {
+  background: transparent; color: #fff;
+  font-size: 14px; padding: 14px 28px;
+  border: 1.5px solid rgba(255,255,255,.35);
+}
+
+/* ════════════════════════════════════════
+   STICKY HEADER
+════════════════════════════════════════ */
+.site-header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255,255,255,.97);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0,0,0,.07);
+  padding: 12px var(--pad);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.site-header__logo { height: 24px; }
+.site-header__cta {
+  background: var(--amber); color: #fff;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 12px; font-weight: 700;
+  padding: 9px 18px; border-radius: 50px;
+  box-shadow: 0 4px 14px rgba(253,170,49,.4);
+}
+
+/* ════════════════════════════════════════
+   S1 : HERO
+════════════════════════════════════════ */
+.s-hero {
+  position: relative;
+  background: var(--dark);
+}
+.s-hero__photo {
+  width: 100%; height: 520px;
+  object-fit: cover; object-position: center 30%;
+  display: block;
+}
+
+/* Device image floating in hero */
+.s-hero__device {
+  position: absolute;
+  right: 16px;
+  top: 52px;
+  width: 130px;
+  z-index: 4;
+  filter: drop-shadow(0 12px 40px rgba(0,0,0,.65));
+  animation: device-float 4s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes device-float {
+  0%, 100% { transform: translateY(0px) rotate(-3deg); }
+  50%       { transform: translateY(-8px) rotate(-3deg); }
+}
+.s-hero__overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10,20,32,.3) 0%,
+    rgba(10,20,32,.55) 40%,
+    rgba(10,20,32,.88) 75%,
+    rgba(10,20,32,1)   100%
+  );
+}
+.s-hero__body {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: var(--pad) var(--pad) 88px;
+}
+.s-hero__eyebrow {
+  font-size: 10px; font-weight: 700; letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--teal); margin-bottom: 16px;
+}
+.s-hero__title {
+  font-size: 38px; font-weight: 900;
+  line-height: 1.22; letter-spacing: -.02em;
+  color: #fff; margin-bottom: 16px;
+  padding-right: 138px; /* leave room for device image */
+}
+.s-hero__title em { font-style: normal; color: var(--amber); }
+.s-hero__sub {
+  font-size: 13px; color: rgba(255,255,255,.75);
+  line-height: 1.9; margin-bottom: 28px;
+}
+.s-hero__cta-note {
+  font-size: 10px; color: rgba(255,255,255,.5);
+  margin-top: 10px; line-height: 1.7;
+}
+
+/* RTB Cards — overlap between hero and next section */
+.rtb-row {
+  position: absolute; bottom: -52px;
+  left: var(--pad); right: var(--pad);
+  z-index: 10;
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 8px;
+}
+.rtb-card {
+  background: var(--white);
+  border-radius: var(--r);
+  padding: 14px 8px 12px;
+  text-align: center;
+  box-shadow: 0 6px 24px rgba(0,0,0,.12);
+  border: 1px solid rgba(0,0,0,.04);
+}
+.rtb-card__icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: var(--teal-lt);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 8px;
+}
+.rtb-card__icon .material-symbols-outlined {
+  font-size: 20px; color: var(--teal);
+}
+.rtb-card__val {
+  font-size: 13px; font-weight: 900; color: var(--text);
+  line-height: 1.2; margin-bottom: 2px;
+}
+.rtb-card__label {
+  font-size: 9px; color: var(--text-2); line-height: 1.5;
+}
+
+/* ════════════════════════════════════════
+   S2 : PROBLEM
+════════════════════════════════════════ */
+.s-problem {
+  background: var(--dark);
+  padding: 88px 0 48px; /* 52px for RTB overlap + 36px gap */
+}
+.s-problem__photo {
+  width: 100%; height: 220px;
+  object-fit: cover; object-position: center;
+  display: block;
+  margin: 28px 0;
+}
+.s-problem__lead {
+  font-size: 26px; font-weight: 700;
+  line-height: 1.5; color: #fff;
+  margin-bottom: 10px;
+}
+.s-problem__lead em { font-style: normal; color: var(--amber); }
+.s-problem__sub {
+  font-size: 13px; color: rgba(255,255,255,.65);
+  line-height: 1.9; margin-bottom: 4px;
+}
+.problem-list { display: flex; flex-direction: column; gap: 0; }
+.problem-item {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 24px 0;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+}
+.problem-item:last-child { border-bottom: none; }
+.problem-item__icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.1);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.problem-item__icon .material-symbols-outlined {
+  font-size: 22px; color: var(--teal);
+}
+.problem-item__body {}
+.problem-item__title {
+  font-size: 14px; font-weight: 700; color: #fff;
+  margin-bottom: 5px; line-height: 1.5;
+}
+.problem-item__quote {
+  font-size: 12px; color: rgba(255,255,255,.55);
+  line-height: 1.85; font-style: italic;
+}
+
+/* ════════════════════════════════════════
+   S3 : DISEASE (zig-zag cards)
+════════════════════════════════════════ */
+.s-disease {
+  background: var(--amber-lt);
+  padding: 48px 0;
+}
+.s-disease__intro { padding: 0 var(--pad) 32px; }
+.s-disease__heading {
+  font-size: 26px; font-weight: 700;
+  line-height: 1.45; color: var(--text);
+  margin-bottom: 10px;
+}
+.s-disease__heading span {
+  font-size: 14px; font-weight: 400; color: var(--text-2);
+  display: block; margin-top: 4px;
+}
+.s-disease__desc { font-size: 13px; color: var(--text-2); line-height: 1.9; }
+.s-disease__photo {
+  width: 100%; height: 200px;
+  object-fit: cover; object-position: center;
+  display: block; margin-bottom: 28px;
+}
+.disease-cards { padding: 0 var(--pad); display: flex; flex-direction: column; gap: 16px; }
+.disease-card {
+  background: var(--white);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,.07);
+}
+.disease-card__head {
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; gap: 10px;
+}
+.disease-card__rank {
+  background: var(--teal); color: #fff;
+  font-size: 10px; font-weight: 700;
+  padding: 4px 10px; border-radius: 50px;
+  white-space: nowrap; flex-shrink: 0;
+}
+.disease-card__rank--gray { background: var(--dark-2); }
+.disease-card__name { font-size: 17px; font-weight: 700; }
+.disease-card__body { padding: 16px 20px 20px; }
+.disease-card__problem {
+  font-size: 12px; color: var(--text-2); line-height: 1.85;
+  margin-bottom: 12px;
+}
+.disease-card__insight {
+  background: var(--amber-lt);
+  border-left: 3px solid var(--amber);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 14px;
+  font-size: 13px; color: var(--text); line-height: 1.8;
+}
+.disease-card__insight strong { color: var(--amber-dk); }
+
+/* ════════════════════════════════════════
+   S4 : STATS / BRIDGE
+════════════════════════════════════════ */
+.s-stats {
+  background: var(--white);
+  padding: 48px 0;
+}
+.s-stats__inner { padding: 0 var(--pad); }
+.s-stats__heading {
+  font-size: 26px; font-weight: 700;
+  line-height: 1.45; color: var(--text);
+  margin-bottom: 10px;
+}
+.s-stats__desc { font-size: 13px; color: var(--text-2); line-height: 1.9; margin-bottom: 36px; }
+.stats-row {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 0; text-align: center;
+  margin-bottom: 32px;
+  border: 1px solid var(--line); border-radius: var(--r);
+  overflow: hidden;
+}
+.stat-cell {
+  padding: 20px 8px;
+  border-right: 1px solid var(--line);
+}
+.stat-cell:last-child { border-right: none; }
+.stat-cell__num {
+  font-size: 28px; font-weight: 900;
+  color: var(--teal); line-height: 1;
+  margin-bottom: 6px; letter-spacing: -.02em;
+}
+.stat-cell__label { font-size: 10px; color: var(--text-2); line-height: 1.6; }
+/* Bridge photo — full bleed */
+.s-stats__bridge-photo {
+  width: 100%; height: 180px;
+  object-fit: cover; object-position: center;
+  display: block; margin: 0 0 0;
+}
+.s-stats__quote {
+  background: var(--dark);
+  padding: 32px var(--pad);
+  text-align: center;
+}
+.s-stats__quote-text {
+  font-size: 20px; font-weight: 700;
+  line-height: 1.65; color: #fff;
+}
+.s-stats__quote-text span { color: var(--amber); }
+
+/* ════════════════════════════════════════
+   S5 : PRODUCT
+════════════════════════════════════════ */
+.s-product {
+  background: var(--teal-lt);
+  padding: 48px 0;
+}
+.s-product__inner { padding: 0 var(--pad); }
+.s-product__device-wrap {
+  position: relative; /* REQUIRED: contains absolutely-positioned children */
+  background: linear-gradient(135deg, #c8f2f7, #e4f8fa);
+  border-radius: var(--r-lg);
+  margin-bottom: 28px;
+  overflow: hidden;
+  min-height: 220px;
+  display: flex; align-items: center; justify-content: center;
+}
+.s-product__device-bg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; opacity: .25;
+}
+.s-product__device-img {
+  position: relative; z-index: 1;
+  max-width: 200px; max-height: 180px;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 32px rgba(13,172,189,.4));
+  margin: 20px auto;
+}
+.s-product__badge {
+  position: absolute; top: 14px; right: 14px; z-index: 2;
+  background: var(--dark); color: #fff;
+  font-size: 10px; font-weight: 700;
+  padding: 5px 12px; border-radius: 50px;
+  display: flex; align-items: center; gap: 5px;
+}
+.s-product__badge .material-symbols-outlined { font-size: 13px; color: var(--amber); }
+.s-product__name {
+  font-size: 28px; font-weight: 900; color: var(--text);
+  margin-bottom: 4px; letter-spacing: .03em;
+}
+.s-product__tagline { font-size: 12px; color: var(--text-2); margin-bottom: 8px; }
+.s-product__lead {
+  font-size: 18px; font-weight: 700; line-height: 1.65;
+  color: var(--text); margin-bottom: 24px;
+}
+.data-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 10px;
+  margin-bottom: 24px;
+}
+.data-cell {
+  background: var(--white);
+  border: 1.5px solid var(--line);
+  border-radius: var(--r); padding: 14px 8px;
+  text-align: center;
+  transition: border-color .2s;
+}
+.data-cell:hover { border-color: var(--teal); }
+.data-cell__icon { margin-bottom: 6px; }
+.data-cell__icon .material-symbols-outlined { font-size: 22px; color: var(--teal); }
+.data-cell__name { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+.data-cell__note { font-size: 10px; color: var(--text-2); line-height: 1.4; }
+.product-patent {
+  background: var(--white);
+  border-radius: var(--r);
+  padding: 14px 16px;
+  display: flex; align-items: flex-start; gap: 10px;
+}
+.product-patent .material-symbols-outlined { font-size: 18px; color: var(--teal); flex-shrink: 0; margin-top: 2px; }
+.product-patent__text { font-size: 12px; color: #555; line-height: 1.8; }
+
+/* ════════════════════════════════════════
+   S6 : FEATURES  (photo + overlapping card)
+════════════════════════════════════════ */
+.s-features { background: var(--white); padding: 48px 0 0; }
+.s-features__header {
+  padding: 0 var(--pad) 36px; text-align: center;
+}
+.s-features__heading {
+  font-size: 26px; font-weight: 700;
+  line-height: 1.45; color: var(--text);
+}
+/* Feature block layout */
+.feature-block { margin-bottom: 48px; }
+.feature-block__photo {
+  width: 100%; height: 240px;
+  object-fit: cover;
+  display: block;
+}
+/* Text card overlaps photo by negative margin */
+.feature-block__card {
+  position: relative;
+  background: var(--white);
+  border-radius: var(--r-lg) var(--r-lg) 0 0;
+  margin: -40px var(--pad) 0;
+  padding: 28px 24px 32px;
+  box-shadow: 0 -6px 32px rgba(0,0,0,.08);
+}
+.feature-block--dark .feature-block__card {
+  background: var(--dark);
+}
+.feature-block__num {
+  font-size: 11px; font-weight: 700; letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--teal); margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.feature-block--dark .feature-block__num { color: var(--amber); }
+.feature-block__title {
+  font-size: 20px; font-weight: 700; line-height: 1.5;
+  color: var(--text); margin-bottom: 12px;
+}
+.feature-block--dark .feature-block__title { color: #fff; }
+.feature-block__desc {
+  font-size: 13px; line-height: 2; color: var(--text-2);
+}
+.feature-block--dark .feature-block__desc { color: rgba(255,255,255,.65); }
+.feature-block__desc strong { color: var(--text); font-weight: 700; }
+.feature-block--dark .feature-block__desc strong { color: #fff; }
+
+/* Feature 2 : dark card with teal stripe */
+.feature-block:nth-child(2) .feature-block__card {
+  border-top: 3px solid var(--teal);
+}
+
+/* Stat pill inside feature card */
+.feature-stat-pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--teal-lt); border-radius: 50px;
+  padding: 8px 14px; margin-top: 16px;
+  font-size: 12px; font-weight: 700; color: var(--teal-dk);
+}
+.feature-stat-pill .material-symbols-outlined { font-size: 16px; }
+
+/* ════════════════════════════════════════
+   S7 : TESTIMONIALS
+════════════════════════════════════════ */
+.s-testi {
+  background: #f6f8fb;
+  padding: 48px 0;
+}
+.s-testi__header { padding: 0 var(--pad) 8px; }
+.s-testi__heading {
+  font-size: 24px; font-weight: 700;
+  line-height: 1.5; color: var(--text);
+}
+.s-testi__sub { font-size: 13px; color: var(--text-2); line-height: 1.9; margin-top: 8px; }
+.testi-wrap { padding-bottom: 52px; margin-top: 28px; }
+.testi-slide { padding: 4px var(--pad); }
+.testi-card {
+  background: var(--white);
+  border-radius: var(--r-lg);
+  box-shadow: 0 4px 24px rgba(0,0,0,.08);
+  overflow: hidden;
+}
+.testi-card__head {
+  background: var(--dark); padding: 20px 20px 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+.testi-card__avatar {
+  width: 48px; height: 48px; border-radius: 50%;
+  overflow: hidden; flex-shrink: 0;
+  background: rgba(255,255,255,.15);
+  border: 2px solid rgba(255,255,255,.2);
+}
+.testi-card__avatar img { width: 100%; height: 100%; object-fit: cover; }
+.testi-card__info { flex: 1; }
+.testi-card__name { font-size: 14px; font-weight: 700; color: #fff; }
+.testi-card__sub  { font-size: 11px; color: rgba(255,255,255,.5); margin-top: 1px; }
+.testi-card__tag {
+  font-size: 10px; font-weight: 700;
+  background: var(--amber); color: #fff;
+  padding: 4px 10px; border-radius: 50px; white-space: nowrap; flex-shrink: 0;
+}
+.testi-card__body { padding: 20px; }
+.testi-card__quote {
+  font-size: 13px; line-height: 2.1; color: #333;
+  padding-left: 14px; border-left: 3px solid var(--teal);
+  margin-bottom: 16px;
+}
+.testi-card__ba {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--line); border-radius: var(--r); overflow: hidden;
+}
+.ba-cell { padding: 12px; }
+.ba-cell + .ba-cell { border-left: 1px solid var(--line); }
+.ba-cell__label { font-size: 10px; font-weight: 700; letter-spacing: .07em; margin-bottom: 4px; }
+.ba-before .ba-cell__label { color: #bbb; }
+.ba-after  .ba-cell__label { color: var(--teal); }
+.ba-cell__text { font-size: 11px; color: #333; line-height: 1.6; }
+/* Slick dots */
+.testi-wrap .slick-dots { bottom: -38px; }
+.testi-wrap .slick-dots li button::before { color: var(--teal); font-size: 8px; }
+.testi-wrap .slick-dots li.slick-active button::before { color: var(--teal); }
+
+/* ════════════════════════════════════════
+   S8 : PRICE
+════════════════════════════════════════ */
+.s-price { background: var(--white); padding: 48px 0 0; }
+.s-price__header { padding: 0 var(--pad) 28px; }
+.s-price__heading {
+  font-size: 26px; font-weight: 700;
+  line-height: 1.45; color: var(--text);
+  margin-bottom: 8px;
+}
+.s-price__desc { font-size: 13px; color: var(--text-2); line-height: 1.9; }
+/* Dog photo above price card, full bleed */
+.s-price__photo {
+  width: 100%; height: 260px;
+  object-fit: cover; object-position: center 30%;
+  display: block; margin-bottom: 0;
+}
+.price-card-wrap {
+  margin: -32px var(--pad) 0;
+  position: relative; z-index: 1;
+  padding-bottom: 48px;
+}
+.price-card {
+  background: var(--white);
+  border-radius: var(--r-lg);
+  box-shadow: 0 8px 40px rgba(0,0,0,.13);
+  overflow: hidden;
+}
+.price-card__top {
+  background: var(--dark); padding: 28px 24px; text-align: center;
+}
+.price-card__tag {
+  display: inline-block; background: var(--amber); color: #fff;
+  font-size: 11px; font-weight: 700; padding: 5px 14px; border-radius: 50px;
+  margin-bottom: 14px;
+}
+.price-card__name { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 20px; }
+.price-card__amounts {
+  display: flex; justify-content: center; align-items: center; gap: 16px;
+  flex-wrap: wrap;
+}
+.price-card__init-old { font-size: 12px; color: rgba(255,255,255,.4); text-decoration: line-through; }
+.price-card__init-val { font-size: 20px; font-weight: 700; color: #fff; }
+.price-card__sep { font-size: 20px; color: rgba(255,255,255,.25); }
+.price-card__monthly-label { font-size: 11px; color: rgba(255,255,255,.55); }
+.price-card__monthly-val { font-size: 42px; font-weight: 900; color: #fff; line-height: 1; }
+.price-card__monthly-val span { font-size: 16px; font-weight: 400; }
+.price-card__body { padding: 24px; }
+.price-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+.price-list li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 13px; color: var(--text); line-height: 1.65;
+}
+.price-list li .material-symbols-outlined {
+  font-size: 18px; color: var(--teal); flex-shrink: 0; margin-top: 1px;
+}
+.price-note { text-align: center; font-size: 11px; color: #aaa; margin-top: 12px; line-height: 1.8; }
+
+/* ════════════════════════════════════════
+   S9 : CLOSING CTA
+════════════════════════════════════════ */
+.s-closing {
+  position: relative;
+}
+.s-closing__photo {
+  width: 100%; height: 500px;
+  object-fit: cover; object-position: center;
+  display: block;
+}
+.s-closing__overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom,
+    rgba(10,20,32,.3) 0%,
+    rgba(10,20,32,.75) 45%,
+    rgba(10,20,32,.97) 100%
+  );
+}
+.s-closing__body {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 0 var(--pad) 100px;
+  text-align: center;
+}
+.s-closing__title {
+  font-size: 26px; font-weight: 700;
+  line-height: 1.55; color: #fff;
+  margin-bottom: 14px;
+}
+.s-closing__title em { font-style: normal; color: var(--amber); }
+.s-closing__sub {
+  font-size: 13px; color: rgba(255,255,255,.75);
+  line-height: 1.9; margin-bottom: 28px;
+}
+.s-closing__note { font-size: 11px; color: rgba(255,255,255,.45); margin-top: 10px; }
+
+/* ════════════════════════════════════════
+   STICKY FOOTER CTA
+════════════════════════════════════════ */
+.sticky-footer {
+  position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: min(480px, 100%); z-index: 200;
+  background: rgba(255,255,255,.97);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(13,172,189,.15);
+  padding: 10px 16px;
+  display: flex; align-items: center; gap: 12px;
+  box-shadow: 0 -4px 24px rgba(0,0,0,.1);
+  transition: opacity .3s, transform .3s;
+}
+.sticky-footer__left { flex: 1; }
+.sticky-footer__price { font-size: 18px; font-weight: 700; color: var(--text); }
+.sticky-footer__price span { font-size: 12px; font-weight: 400; color: #aaa; }
+.sticky-footer__note { font-size: 10px; color: #aaa; margin-top: 1px; }
+.sticky-footer__btn {
+  background: var(--amber); color: #fff;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 13px; font-weight: 700;
+  padding: 13px 18px; border-radius: 50px; white-space: nowrap;
+  display: flex; align-items: center; gap: 4px;
+  box-shadow: 0 4px 16px rgba(253,170,49,.45);
+}
+.sticky-footer__btn .material-symbols-outlined { font-size: 15px; }
+
+  </style>
+</head>
+<body>
+<div class="app-wrapper">
+
+<!-- ─────────── HEADER ─────────── -->
+<header class="site-header">
+  <img
+    src="https://www.petvoice.co.jp/wp/wp-content/themes/PetVoice/lp-img/top/header_logo.svg"
+    onerror="this.src='https://www.petvoice.co.jp/wp/wp-content/themes/PetVoice/lp-img/top/header_logo-white.svg'"
+    alt="PetVoice" class="site-header__logo">
+  <a href="https://order.petvoice.co.jp/items" class="site-header__cta" target="_blank">今すぐ注文</a>
+</header>
+
+
+<!-- ════════════════════════════════
+  S1 : HERO
+════════════════════════════════ -->
+<section class="s-hero">
+  <!-- 背景写真 -->
+  <img
+    src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=480&q=85"
+    alt="愛犬" class="s-hero__photo">
+  <div class="s-hero__overlay"></div>
+
+  <!-- デバイス画像 -->
+  <img
+    src="https://www.petvoice.co.jp/wp/wp-content/themes/PetVoice/lp-img/lp3/smart-collar/sc-content.png"
+    onerror="this.src='https://www.petvoice.co.jp/wp/wp-content/themes/PetVoice/lp-img/lp3/key-visual/kv.png'"
+    alt="PetVoice スマートカラー"
+    class="s-hero__device">
+
+  <!-- テキスト -->
+  <div class="s-hero__body">
+    <p class="s-hero__eyebrow">PetVoice — Pet Health Monitor</p>
+    <h1 class="s-hero__title">
+      「<em>苦しい</em>」って、<br>言えないんだよ。
+    </h1>
+    <p class="s-hero__sub">
+      「なんか今日元気ないな」——でも、確かめる方法がなかった。<br>
+      PetVoiceは15のデータで、ペットの「苦しい」を24時間届けます。
+    </p>
+    <a href="https://order.petvoice.co.jp/items" class="btn btn-amber-full" target="_blank">
+      月額980円〜 今すぐ注文する
+      <span class="material-symbols-outlined">arrow_forward</span>
+    </a>
+    <p class="s-hero__cta-note">初回限定 初期費用50%オフ・1年間補償付き・最短3分で注文完了</p>
+  </div>
+
+  <!-- RTB Cards (overlap into next section) -->
+  <div class="rtb-row">
+    <div class="rtb-card">
+      <div class="rtb-card__icon">
+        <span class="material-symbols-outlined">menu_book</span>
+      </div>
+      <div class="rtb-card__val">Oxford</div>
+      <div class="rtb-card__label">大学医療誌<br>掲載</div>
+    </div>
+    <div class="rtb-card">
+      <div class="rtb-card__icon">
+        <span class="material-symbols-outlined">local_hospital</span>
+      </div>
+      <div class="rtb-card__val">400+</div>
+      <div class="rtb-card__label">全国病院<br>と連携</div>
+    </div>
+    <div class="rtb-card">
+      <div class="rtb-card__icon">
+        <span class="material-symbols-outlined">verified</span>
+      </div>
+      <div class="rtb-card__val">特許</div>
+      <div class="rtb-card__label">取得済<br>技術</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════
+  S2 : PROBLEM
+════════════════════════════════ -->
+<section class="s-problem">
+  <div class="pad">
+    <p class="eyebrow eyebrow--inv">The Problem</p>
+    <p class="s-problem__lead">
+      ペットは、「苦しい」と言えない。<br>
+      <em>だから、気づけない。</em>
+    </p>
+    <p class="s-problem__sub">
+      病気は、突然やってくるわけじゃない。最初は必ず、小さなサインがある。でも、ペットはそれを言葉にできない。だから気づいてあげられない——それが、一番つらい。
+    </p>
+  </div>
+
+  <!-- Full-bleed photo -->
+  <img
+    src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=480&q=80"
+    alt="心配そうな犬" class="s-problem__photo bleed">
+
+  <div class="pad">
+    <div class="problem-list">
+      <div class="problem-item">
+        <div class="problem-item__icon">
+          <span class="material-symbols-outlined">work_alert</span>
+        </div>
+        <div class="problem-item__body">
+          <p class="problem-item__title">仕事中もスマホが気になって、集中できなかった</p>
+          <p class="problem-item__quote">「帰ったら様子がおかしくて、すぐ病院へ。即入院でした。あの罪悪感は、今も消えない」</p>
+        </div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-item__icon">
+          <span class="material-symbols-outlined">sentiment_dissatisfied</span>
+        </div>
+        <div class="problem-item__body">
+          <p class="problem-item__title">「もう手遅れです」と言われた</p>
+          <p class="problem-item__quote">「ずっとそばにいたのに、気づいてあげられなかった。もっと早く連れて行っていれば、と後悔しています」</p>
+        </div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-item__icon">
+          <span class="material-symbols-outlined">heart_broken</span>
+        </div>
+        <div class="problem-item__body">
+          <p class="problem-item__title">苦しんでいるのに、気づいてあげられない</p>
+          <p class="problem-item__quote">「できることは全部やりたい。なのに、声を聞く方法がなかった。それが一番つらかった」</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════
+  S3 : DISEASE
+════════════════════════════════ -->
+<section class="s-disease">
+  <div class="s-disease__intro">
+    <p class="eyebrow">Silent Signs</p>
+    <h2 class="s-disease__heading">
+      病気は突然じゃない。<br>必ず「前兆」がある。
+      <span>あとは、気づけるかどうか。</span>
+    </h2>
+    <p class="s-disease__desc">
+      心臓病・腎臓病・がん——命を奪う病気ほど、発症よりずっと前から体はサインを出しています。
+    </p>
+  </div>
+
+  <!-- Full-bleed photo -->
+  <img
+    src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=480&q=80"
+    alt="犬と飼い主" class="s-disease__photo bleed">
+
+  <div class="disease-cards">
+    <div class="disease-card">
+      <div class="disease-card__head">
+        <span class="disease-card__rank">犬の死因 第1位</span>
+        <span class="disease-card__name">がん・腫瘍</span>
+      </div>
+      <div class="disease-card__body">
+        <p class="disease-card__problem">
+          外見ではほぼ気づけない。しこりが出るまで発見できないことが多く、「動きが鈍くなって初めて気づいた」という後悔が後を絶たない。
+        </p>
+        <div class="disease-card__insight">
+          がんの<strong>痛みは心拍数の上昇</strong>として先に現れる。活動量の変化も重要な初期サイン。毎日のデータがあれば、気づく機会は格段に増える。
+        </div>
+      </div>
+    </div>
+
+    <div class="disease-card">
+      <div class="disease-card__head">
+        <span class="disease-card__rank">犬の死因 第2位</span>
+        <span class="disease-card__name">心臓病・肺水腫</span>
+      </div>
+      <div class="disease-card__body">
+        <p class="disease-card__problem">
+          悪化のサインは「呼吸」に先に現れるが、安静時の呼吸数を毎日正確に測るのは現実的に難しい。
+        </p>
+        <div class="disease-card__insight">
+          <strong>安静時呼吸数の変化</strong>は、肺水腫の最大1週間前から現れる。PetVoiceで早期発見し、入院を回避できたケースが多数報告されている。
+        </div>
+      </div>
+    </div>
+
+    <div class="disease-card">
+      <div class="disease-card__head">
+        <span class="disease-card__rank disease-card__rank--gray">猫 第1位 / 犬 第3位</span>
+        <span class="disease-card__name">腎臓病</span>
+      </div>
+      <div class="disease-card__body">
+        <p class="disease-card__problem">
+          症状が出にくいため、食欲がなくなって気づいた時には末期、というケースが珍しくない。
+        </p>
+        <div class="disease-card__insight">
+          最初のサインは<strong>活動量の低下・心拍の変化</strong>。この静かな変化に気づくには、毎日のデータを記録し続けるしかない。
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════
+  S4 : STATS / BRIDGE
+════════════════════════════════ -->
+<section class="s-stats">
+  <div class="s-stats__inner">
+    <p class="eyebrow">Why It Matters</p>
+    <h2 class="s-stats__heading">
+      早期発見は、「安心」じゃなく<br>「時間」を増やす。
+    </h2>
+    <p class="s-stats__desc">
+      進行を遅らせ、治療の選択肢を広げ、一緒にいられる時間を具体的に延ばします。
+    </p>
+    <div class="stats-row">
+      <div class="stat-cell">
+        <div class="stat-cell__num">1週間</div>
+        <div class="stat-cell__label">早く異変に<br>気づけた例</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-cell__num">24h</div>
+        <div class="stat-cell__label">休まず<br>見守り続ける</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-cell__num">15項目</div>
+        <div class="stat-cell__label">同時<br>モニタリング</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Full-bleed photo bridge -->
+  <img
+    src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=480&q=80"
+    alt="犬の表情" class="s-stats__bridge-photo bleed">
+  <div class="s-stats__quote">
+    <p class="s-stats__quote-text">
+      「<span>気づいてあげられなかった</span>」<br>その後悔を、なくしたい。
+    </p>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════
+  S5 : PRODUCT
+════════════════════════════════ -->
+<section class="s-product">
+  <div class="s-product__inner">
+    <p class="eyebrow">The Solution</p>
+
+    <!-- Device visual with dog photo as bg -->
+    <div class="s-product__device-wrap">
+      <img
+        src="https://images.unsplash.com/photo-1583512603805-3cc6b41f3edb?w=480&q=75"
+        alt="くつろぐ犬" class="s-product__device-bg">
+      <img
+        src="https://www.petvoice.co.jp/wp/wp-content/themes/PetVoice/lp-img/lp3/smart-collar/sc-content.webp"
+        onerror="this.src='https://www.petvoice.co.jp/wp/wp-content/themes/PetVoice/lp-img/lp3/smart-collar/sc-content.png'"
+        alt="PetVoice スマート首輪" class="s-product__device-img">
+      <div class="s-product__badge">
+        <span class="material-symbols-outlined">science</span>特許取得
+      </div>
+    </div>
+
+    <div class="s-product__name">PetVoice</div>
+    <div class="s-product__tagline">スマート首輪型 ペット健康管理デバイス</div>
+    <p class="s-product__lead">
+      首輪を着けるだけ。<br>あとはPetVoiceが、休まず<br>ペットの体の声を届けます。
+    </p>
+
+    <div class="data-grid">
+      <div class="data-cell">
+        <div class="data-cell__icon"><span class="material-symbols-outlined">respiratory_rate</span></div>
+        <div class="data-cell__name">呼吸数</div>
+        <div class="data-cell__note">安静時を自動検出</div>
+      </div>
+      <div class="data-cell">
+        <div class="data-cell__icon"><span class="material-symbols-outlined">favorite</span></div>
+        <div class="data-cell__name">心拍数</div>
+        <div class="data-cell__note">痛みのサイン</div>
+      </div>
+      <div class="data-cell">
+        <div class="data-cell__icon"><span class="material-symbols-outlined">thermostat</span></div>
+        <div class="data-cell__name">体温</div>
+        <div class="data-cell__note">副作用も検知</div>
+      </div>
+      <div class="data-cell">
+        <div class="data-cell__icon"><span class="material-symbols-outlined">directions_run</span></div>
+        <div class="data-cell__name">活動量</div>
+        <div class="data-cell__note">元気度の変化</div>
+      </div>
+      <div class="data-cell">
+        <div class="data-cell__icon"><span class="material-symbols-outlined">restaurant</span></div>
+        <div class="data-cell__name">食事回数</div>
+        <div class="data-cell__note">食欲の変化</div>
+      </div>
+      <div class="data-cell">
+        <div class="data-cell__icon"><span class="material-symbols-outlined">water_drop</span></div>
+        <div class="data-cell__name">排尿回数</div>
+        <div class="data-cell__note">腎臓のサイン</div>
+      </div>
+    </div>
+
+    <div class="product-patent">
+      <span class="material-symbols-outlined">verified_user</span>
+      <p class="product-patent__text">
+        PetVoiceを用いた研究がオックスフォード大学医療誌に掲載。全国400以上の動物病院でも入院管理に採用されるほどの計測精度です。
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════
+  S6 : FEATURES
+════════════════════════════════ -->
+<section class="s-features">
+  <div class="s-features__header">
+    <p class="eyebrow" style="justify-content:center;">How It Works</p>
+    <h2 class="s-features__heading">離れていても、<br>繋がっている。</h2>
+  </div>
+
+  <!-- Feature 1: light card overlapping photo -->
+  <div class="feature-block">
+    <img
+      src="https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?w=480&q=80"
+      alt="見守られる犬" class="feature-block__photo bleed">
+    <div class="feature-block__card">
+      <p class="feature-block__num">
+        <span class="material-symbols-outlined" style="font-size:16px; color:var(--teal);">notifications_active</span>
+        Feature 01 — Alert
+      </p>
+      <h3 class="feature-block__title">「あの時すぐ病院に<br>行けばよかった」を、なくす。</h3>
+      <p class="feature-block__desc">
+        <strong>仕事中</strong>も、<strong>深夜</strong>も、PetVoiceは休まず見守り続けます。呼吸数・心拍数が変化したとき、スマホへ即アラート。「帰宅したら手遅れだった」という後悔を防ぎます。
+      </p>
+      <div class="feature-stat-pill">
+        <span class="material-symbols-outlined">schedule</span>
+        24時間365日、休まず稼働
+      </div>
+    </div>
+  </div>
+
+  <!-- Feature 2: dark card overlapping photo -->
+  <div class="feature-block feature-block--dark">
+    <img
+      src="https://images.unsplash.com/photo-1576201836106-db1758fd1c97?w=480&q=80"
+      alt="獣医と犬" class="feature-block__photo bleed">
+    <div class="feature-block__card">
+      <p class="feature-block__num">
+        <span class="material-symbols-outlined" style="font-size:16px; color:var(--amber);">share</span>
+        Feature 02 — Vet Cooperation
+      </p>
+      <h3 class="feature-block__title">「なんとなく元気がない」が<br>「データで証明できる」に変わる</h3>
+      <p class="feature-block__desc">
+        「なんか元気がない気がして……」だけでは、獣医師も判断できない。でも「この5日間、安静時心拍数が平均より15%高い」というデータを見せれば、話が変わります。<strong>あなたの「勘」を、証拠に変えます。</strong>全国400病院と連携済み。
+      </p>
+      <div class="feature-stat-pill" style="background:rgba(13,172,189,.15); color:var(--teal);">
+        <span class="material-symbols-outlined">local_hospital</span>
+        全国400病院と連携
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════
+  S7 : TESTIMONIALS
+════════════════════════════════ -->
+<section class="s-testi">
+  <div class="s-testi__header">
+    <p class="eyebrow">Real Voices</p>
+    <h2 class="s-testi__heading">声が届いたから、<br>助けられた命がある。</h2>
+    <p class="s-testi__sub">みんな最初は「大げさかな」と思っていた。でも、データが命を救った。</p>
+  </div>
+
+  <div class="testi-wrap">
+    <div class="testi-slider">
+
+      <div class="testi-slide">
+        <div class="testi-card">
+          <div class="testi-card__head">
+            <div class="testi-card__avatar">
+              <img src="https://www.petvoice.co.jp/wp/wp-content/themes/PetVoice/lp-img/lp3/lives-saved/ls-kokona.png" alt="ここなちゃん">
+            </div>
+            <div class="testi-card__info">
+              <div class="testi-card__name">ここなちゃん 11歳</div>
+              <div class="testi-card__sub">トイプードル / 女の子</div>
+            </div>
+            <span class="testi-card__tag">心臓病</span>
+          </div>
+          <div class="testi-card__body">
+            <p class="testi-card__quote">
+              先代犬を心臓病で亡くし、健康管理の重要性を痛感して使い続けていました。ある時、呼吸数が何度か高い数値を記録したため受診したところ、心臓病の初期段階（ステージB1）が見つかりました。まだ投薬も必要ない段階で気づけたのは、毎日のデータがあったからです。
+            </p>
+            <div class="testi-card__ba">
+              <div class="ba-cell ba-before">
+                <div class="ba-cell__label">BEFORE</div>
+                <div class="ba-cell__text">「いつもと違う気がする」が確認できず不安な毎日</div>
+              </div>
+              <div class="ba-cell ba-after">
+                <div class="ba-cell__label">AFTER</div>
+                <div class="ba-cell__text">数値で確認できるから安心して仕事に行ける</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-slide">
+        <div class="testi-card">
+          <div class="testi-card__head">
+            <div class="testi-card__avatar">
+              <img src="https://www.petvoice.co.jp/wp/wp-content/themes/PetVoice/lp-img/lp3/lives-saved/ls-tyobi.png" alt="ちょびくん">
+            </div>
+            <div class="testi-card__info">
+              <div class="testi-card__name">ちょびくん 15歳</div>
+              <div class="testi-card__sub">トイプードル / 男の子</div>
+            </div>
+            <span class="testi-card__tag">肺水腫</span>
+          </div>
+          <div class="testi-card__body">
+            <p class="testi-card__quote">
+              呼吸数がわずかに上昇し続けたため受診しましたが、聴診では「再発なし」。それでも数値が気になり後日レントゲンを撮ると、軽い肺水腫が判明。見た目も元気で、獣医師さえ気づかない段階で発見できました。
+            </p>
+            <div class="testi-card__ba">
+              <div class="ba-cell ba-before">
+                <div class="ba-cell__label">BEFORE</div>
+                <div class="ba-cell__text">外出のたびに心配で、出かけられなかった</div>
+              </div>
+              <div class="ba-cell ba-after">
+                <div class="ba-cell__label">AFTER</div>
+                <div class="ba-cell__text">スマホで確認できるから安心して外出できる</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-slide">
+        <div class="testi-card">
+          <div class="testi-card__head">
+            <div class="testi-card__avatar">
+              <img src="https://www.petvoice.co.jp/wp/wp-content/themes/PetVoice/lp-img/lp3/lives-saved/ls-suzu.png" alt="すずちゃん">
+            </div>
+            <div class="testi-card__info">
+              <div class="testi-card__name">すずちゃん 3歳</div>
+              <div class="testi-card__sub">デボンレックス / 女の子</div>
+            </div>
+            <span class="testi-card__tag">先天性心疾患</span>
+          </div>
+          <div class="testi-card__body">
+            <p class="testi-card__quote">
+              急に動かなくなることが不安で、ずっとストップウォッチで呼吸数を測っていました。PetVoice導入後、自分で測った数値とアプリの数値がほぼ一致しており驚きました。外出中でも「いつも通りだな」と確認でき、張り詰めていた気持ちが楽になりました。
+            </p>
+            <div class="testi-card__ba">
+              <div class="ba-cell ba-before">
+                <div class="ba-cell__label">BEFORE</div>
+                <div class="ba-cell__text">ストップウォッチで手動計測。精神的に限界だった</div>
+              </div>
+              <div class="ba-cell ba-after">
+                <div class="ba-cell__label">AFTER</div>
+                <div class="ba-cell__text">自動で24時間記録。心に余裕が生まれた</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════
+  S8 : PRICE
+════════════════════════════════ -->
+<section class="s-price">
+  <div class="s-price__header">
+    <p class="eyebrow">Get Started</p>
+    <h2 class="s-price__heading">今日から、<br>「気づいてあげられる」<br>飼い主になれる。</h2>
+    <p class="s-price__desc">必要なものが全部セット。最短3分で注文完了。難しい設定は不要です。</p>
+  </div>
+
+  <!-- Full-bleed photo, price card overlaps -->
+  <img
+    src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=480&q=80"
+    alt="笑顔の犬" class="s-price__photo bleed">
+
+  <div class="price-card-wrap">
+    <div class="price-card">
+      <div class="price-card__top">
+        <div class="price-card__tag">初回限定 50%オフ</div>
+        <div class="price-card__name">PetVoice かんたん導入セット</div>
+        <div class="price-card__amounts">
+          <div>
+            <div class="price-card__init-old">初期費用 通常6,950円</div>
+            <div class="price-card__init-val">初回 3,475円</div>
+          </div>
+          <div class="price-card__sep">+</div>
+          <div>
+            <div class="price-card__monthly-label">月額（税込）</div>
+            <div class="price-card__monthly-val">980<span>円〜</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="price-card__body">
+        <ul class="price-list">
+          <li>
+            <span class="material-symbols-outlined icon-fill">check_circle</span>
+            首輪・端末・充電器——導入に必要なものが全て揃ったスターターセット
+          </li>
+          <li>
+            <span class="material-symbols-outlined icon-fill">check_circle</span>
+            1年間の交換・修理補償付き（補償プランは月額+500円）
+          </li>
+          <li>
+            <span class="material-symbols-outlined icon-fill">check_circle</span>
+            計測データを獣医師と共有できる病院連携機能付き
+          </li>
+          <li>
+            <span class="material-symbols-outlined icon-fill">check_circle</span>
+            呼吸数・心拍数・体温など15項目を24時間自動記録
+          </li>
+          <li>
+            <span class="material-symbols-outlined icon-fill">check_circle</span>
+            異変を即座にお知らせするスマホへのプッシュ通知アラート
+          </li>
+        </ul>
+        <a href="https://order.petvoice.co.jp/items" class="btn btn-amber-full" target="_blank">
+          最短3分で注文する
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </a>
+        <p class="price-note">
+          ※補償プラン加入により500円/月が別途かかります<br>
+          ※デバイスは完全レンタルです
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════
+  S9 : CLOSING CTA
+════════════════════════════════ -->
+<section class="s-closing">
+  <img
+    src="https://images.unsplash.com/photo-1558788353-f76d92427f16?w=480&q=80"
+    alt="犬と飼い主" class="s-closing__photo bleed">
+  <div class="s-closing__overlay"></div>
+  <div class="s-closing__body">
+    <p class="eyebrow eyebrow--white" style="justify-content:center;">PetVoice</p>
+    <h2 class="s-closing__title">
+      「気づいてあげたい」——<br>
+      その気持ちに、<br>応えるために<em>PetVoice</em>はある。
+    </h2>
+    <p class="s-closing__sub">
+      月額980円〜。それだけで、24時間の安心が手に入ります。<br>
+      「あの時気づいてあげられていれば」——その後悔を、これ以上させたくないから。
+    </p>
+    <a href="https://order.petvoice.co.jp/items" class="btn btn-amber-full" target="_blank">
+      今すぐ注文する
+      <span class="material-symbols-outlined">arrow_forward</span>
+    </a>
+    <p class="s-closing__note">初回限定50%オフ・最短3分で注文完了</p>
+  </div>
+</section>
+
+</div><!-- /.app-wrapper -->
+
+
+<!-- ════════════════════════════════
+  STICKY FOOTER CTA
+════════════════════════════════ -->
+<div class="sticky-footer" id="sticky-footer">
+  <div class="sticky-footer__left">
+    <div class="sticky-footer__price">980<span>円/月〜</span></div>
+    <div class="sticky-footer__note">初期費用50%オフ・1年補償付き</div>
+  </div>
+  <a href="https://order.petvoice.co.jp/items" class="sticky-footer__btn" target="_blank">
+    今すぐ注文
+    <span class="material-symbols-outlined">arrow_forward</span>
+  </a>
+</div>
+
+
+<script>
+$(document).ready(function () {
+  /* Testimonial carousel */
+  $('.testi-slider').slick({
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    dots: true,
+    autoplay: true,
+    autoplaySpeed: 6000,
+    speed: 500
+  });
+
+  /* Hide sticky footer while hero is in view */
+  const footer = document.getElementById('sticky-footer');
+  const hero = document.querySelector('.s-hero');
+  if (footer && hero) {
+    footer.style.transition = 'opacity .3s, transform .3s';
+    const io = new IntersectionObserver(([e]) => {
+      footer.style.opacity      = e.isIntersecting ? '0' : '1';
+      footer.style.pointerEvents= e.isIntersecting ? 'none' : 'auto';
+    }, { threshold: 0.1 });
+    io.observe(hero);
+  }
+});
+</script>
+
+</body>
+</html>
