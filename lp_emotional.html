@@ -722,6 +722,62 @@ body::before {
 }
 .sticky-footer__btn .material-symbols-outlined { font-size: 15px; }
 
+/* ════════════════════════════════════════
+   S8b : LINE + 紹介キャンペーン
+════════════════════════════════════════ */
+.s-line {
+  background: #f0faf5;
+  padding: 48px 0;
+  border-top: 1px solid rgba(0,0,0,.06);
+}
+.s-line__inner { padding: 0 var(--pad); }
+.s-line__heading {
+  font-size: 26px; font-weight: 700;
+  line-height: 1.45; color: var(--text);
+  margin-bottom: 10px; text-align: center;
+}
+.s-line__desc {
+  font-size: 13px; color: var(--text-2);
+  line-height: 1.9; margin-bottom: 24px; text-align: center;
+}
+.btn-line {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; padding: 18px 24px;
+  background: #06C755; color: #fff;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 16px; font-weight: 700;
+  border-radius: 50px; border: none; cursor: pointer;
+  box-shadow: 0 6px 24px rgba(6,199,85,.35);
+  text-decoration: none;
+  transition: transform .15s, box-shadow .15s;
+  margin-bottom: 24px;
+}
+.btn-line:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(6,199,85,.4); }
+
+/* 紹介キャンペーンバナー */
+.referral-banner {
+  display: flex; align-items: flex-start; gap: 12px;
+  background: var(--white);
+  border: 1.5px solid var(--amber);
+  border-radius: var(--r);
+  padding: 16px;
+}
+.referral-banner__icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: var(--amber-lt);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.referral-banner__icon .material-symbols-outlined { font-size: 22px; color: var(--amber-dk); }
+.referral-banner__label {
+  font-size: 12px; font-weight: 700; color: var(--amber-dk);
+  margin-bottom: 4px;
+}
+.referral-banner__text {
+  font-size: 12px; color: var(--text-2); line-height: 1.75;
+}
+.referral-banner__text strong { color: var(--text); }
+
   </style>
 </head>
 <body>
@@ -762,7 +818,7 @@ body::before {
     </h1>
     <p class="s-hero__sub">
       「なんか今日元気ないな」——でも、確かめる方法がなかった。<br>
-      PetVoiceは15のデータで、ペットの「苦しい」を24時間届けます。
+      PetVoiceは15のデータで、ペットの異変をいち早く伝えます。
     </p>
     <a href="https://order.petvoice.co.jp/items" class="btn btn-amber-full" target="_blank">
       月額980円〜 今すぐ注文する
@@ -777,8 +833,8 @@ body::before {
       <div class="rtb-card__icon">
         <span class="material-symbols-outlined">menu_book</span>
       </div>
-      <div class="rtb-card__val">Oxford</div>
-      <div class="rtb-card__label">大学医療誌<br>掲載</div>
+      <div class="rtb-card__val" style="font-size:10px; line-height:1.3;">オックスフォード<br>大学医療誌</div>
+      <div class="rtb-card__label">掲載</div>
     </div>
     <div class="rtb-card">
       <div class="rtb-card__icon">
@@ -880,10 +936,10 @@ body::before {
       </div>
       <div class="disease-card__body">
         <p class="disease-card__problem">
-          外見ではほぼ気づけない。しこりが出るまで発見できないことが多く、「動きが鈍くなって初めて気づいた」という後悔が後を絶たない。
+          外見ではほぼ気づけない。しこりが見えるころにはすでに進行していることが多く、「動きが鈍くなって初めて気づいた」という後悔が後を絶たない。
         </p>
         <div class="disease-card__insight">
-          がんの<strong>痛みは心拍数の上昇</strong>として先に現れる。活動量の変化も重要な初期サイン。毎日のデータがあれば、気づく機会は格段に増える。
+          がんの<strong>痛みは心拍数の上昇</strong>として外見より先に現れる。活動量の低下も重要な初期サイン。PetVoiceが毎日の変化を記録し、気づきのチャンスを逃しません。
         </div>
       </div>
     </div>
@@ -895,10 +951,10 @@ body::before {
       </div>
       <div class="disease-card__body">
         <p class="disease-card__problem">
-          悪化のサインは「呼吸」に先に現れるが、安静時の呼吸数を毎日正確に測るのは現実的に難しい。
+          悪化のサインは「呼吸」に先に現れるが、安静時の呼吸数を毎日正確に測るのは現実的に難しく、気づいたときには重篤化しているケースも多い。
         </p>
         <div class="disease-card__insight">
-          <strong>安静時呼吸数の変化</strong>は、肺水腫の最大1週間前から現れる。PetVoiceで早期発見し、入院を回避できたケースが多数報告されている。
+          <strong>安静時呼吸数の上昇</strong>は、肺水腫の最大1週間前から現れる。PetVoiceが自動検出・記録するから、早期受診で入院を回避できたケースが多数報告されている。
         </div>
       </div>
     </div>
@@ -910,10 +966,10 @@ body::before {
       </div>
       <div class="disease-card__body">
         <p class="disease-card__problem">
-          症状が出にくいため、食欲がなくなって気づいた時には末期、というケースが珍しくない。
+          症状が出にくく、食欲低下で気づいたときには末期というケースが珍しくない。猫はとくに進行が速く、早期発見が生存率を大きく左右する。
         </p>
         <div class="disease-card__insight">
-          最初のサインは<strong>活動量の低下・心拍の変化</strong>。この静かな変化に気づくには、毎日のデータを記録し続けるしかない。
+          初期サインは<strong>活動量の低下・心拍の変化・排尿回数の増加</strong>。この静かな変化に気づくには、毎日のデータを記録し続けるしかない。
         </div>
       </div>
     </div>
@@ -1001,7 +1057,7 @@ body::before {
       </div>
       <div class="data-cell">
         <div class="data-cell__icon"><span class="material-symbols-outlined">thermostat</span></div>
-        <div class="data-cell__name">体温</div>
+        <div class="data-cell__name">推定直腸温</div>
         <div class="data-cell__note">副作用も検知</div>
       </div>
       <div class="data-cell">
@@ -1024,7 +1080,7 @@ body::before {
     <div class="product-patent">
       <span class="material-symbols-outlined">verified_user</span>
       <p class="product-patent__text">
-        PetVoiceを用いた研究がオックスフォード大学医療誌に掲載。全国400以上の動物病院でも入院管理に採用されるほどの計測精度です。
+        PetVoiceを用いた研究がオックスフォード大学医療誌掲載。全国400以上の動物病院でも入院管理に採用されるほどの計測精度です。
       </p>
     </div>
   </div>
@@ -1240,7 +1296,7 @@ body::before {
           </li>
           <li>
             <span class="material-symbols-outlined icon-fill">check_circle</span>
-            呼吸数・心拍数・体温など15項目を24時間自動記録
+            呼吸数・心拍数・推定直腸温など15項目を24時間自動記録
           </li>
           <li>
             <span class="material-symbols-outlined icon-fill">check_circle</span>
@@ -1255,6 +1311,33 @@ body::before {
           ※補償プラン加入により500円/月が別途かかります<br>
           ※デバイスは完全レンタルです
         </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════
+  S8b : LINE + 紹介キャンペーン
+════════════════════════════════ -->
+<section class="s-line">
+  <div class="s-line__inner">
+    <p class="eyebrow" style="justify-content:center;">LINE公式アカウント</p>
+    <h2 class="s-line__heading">まずはLINEで<br>気軽に相談・情報収集</h2>
+    <p class="s-line__desc">購入前の疑問・使い方のコツ・健康管理のヒントをLINEでお届けします。登録は無料、いつでも退会できます。</p>
+    <a href="https://lin.ee/petvoice" class="btn-line" target="_blank">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;"><path d="M12 2C6.48 2 2 6.03 2 11c0 2.7 1.3 5.12 3.36 6.83L4.5 22l4.36-1.44C9.84 20.83 10.9 21 12 21c5.52 0 10-4.03 10-9S17.52 2 12 2zm0 16c-.92 0-1.82-.12-2.68-.34l-.48-.13-2.58.86.74-2.53-.33-.46C5.17 14.21 4 12.68 4 11c0-4.41 3.58-8 8-8s8 3.59 8 8-3.58 8-8 8z"/></svg>
+      LINE友だち追加（無料）
+    </a>
+
+    <!-- 紹介キャンペーン -->
+    <div class="referral-banner">
+      <div class="referral-banner__icon">
+        <span class="material-symbols-outlined icon-fill">card_giftcard</span>
+      </div>
+      <div class="referral-banner__body">
+        <p class="referral-banner__label">🎁 紹介キャンペーン実施中（5月1日〜）</p>
+        <p class="referral-banner__text">お友だちをご紹介いただくと、紹介者・被紹介者ともに<strong>1,000円分のギフト</strong>をプレゼント！</p>
       </div>
     </div>
   </div>
