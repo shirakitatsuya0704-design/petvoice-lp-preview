@@ -722,62 +722,6 @@ body::before {
 }
 .sticky-footer__btn .material-symbols-outlined { font-size: 15px; }
 
-/* ════════════════════════════════════════
-   S8b : LINE + 紹介キャンペーン
-════════════════════════════════════════ */
-.s-line {
-  background: #f0faf5;
-  padding: 48px 0;
-  border-top: 1px solid rgba(0,0,0,.06);
-}
-.s-line__inner { padding: 0 var(--pad); }
-.s-line__heading {
-  font-size: 26px; font-weight: 700;
-  line-height: 1.45; color: var(--text);
-  margin-bottom: 10px; text-align: center;
-}
-.s-line__desc {
-  font-size: 13px; color: var(--text-2);
-  line-height: 1.9; margin-bottom: 24px; text-align: center;
-}
-.btn-line {
-  display: flex; align-items: center; justify-content: center; gap: 10px;
-  width: 100%; padding: 18px 24px;
-  background: #06C755; color: #fff;
-  font-family: 'Noto Sans JP', sans-serif;
-  font-size: 16px; font-weight: 700;
-  border-radius: 50px; border: none; cursor: pointer;
-  box-shadow: 0 6px 24px rgba(6,199,85,.35);
-  text-decoration: none;
-  transition: transform .15s, box-shadow .15s;
-  margin-bottom: 24px;
-}
-.btn-line:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(6,199,85,.4); }
-
-/* 紹介キャンペーンバナー */
-.referral-banner {
-  display: flex; align-items: flex-start; gap: 12px;
-  background: var(--white);
-  border: 1.5px solid var(--amber);
-  border-radius: var(--r);
-  padding: 16px;
-}
-.referral-banner__icon {
-  width: 40px; height: 40px; border-radius: 10px;
-  background: var(--amber-lt);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-}
-.referral-banner__icon .material-symbols-outlined { font-size: 22px; color: var(--amber-dk); }
-.referral-banner__label {
-  font-size: 12px; font-weight: 700; color: var(--amber-dk);
-  margin-bottom: 4px;
-}
-.referral-banner__text {
-  font-size: 12px; color: var(--text-2); line-height: 1.75;
-}
-.referral-banner__text strong { color: var(--text); }
-
   </style>
 </head>
 <body>
@@ -1153,6 +1097,7 @@ body::before {
   <div class="testi-wrap">
     <div class="testi-slider">
 
+      <!-- スライド1：心臓病 -->
       <div class="testi-slide">
         <div class="testi-card">
           <div class="testi-card__head">
@@ -1183,60 +1128,62 @@ body::before {
         </div>
       </div>
 
+      <!-- スライド2：腎臓病（lp_jinzo.html より） -->
       <div class="testi-slide">
         <div class="testi-card">
           <div class="testi-card__head">
             <div class="testi-card__avatar">
-              <img src="https://www.petvoice.co.jp/wp/wp-content/themes/PetVoice/lp-img/lp3/lives-saved/ls-tyobi.png" alt="ちょびくん">
+              <img src="images/img_vanilla.jpg" alt="バニラちゃん">
             </div>
             <div class="testi-card__info">
-              <div class="testi-card__name">ちょびくん 15歳</div>
-              <div class="testi-card__sub">トイプードル / 男の子</div>
+              <div class="testi-card__name">バニラちゃん 16歳</div>
+              <div class="testi-card__sub">慢性腎臓病</div>
             </div>
-            <span class="testi-card__tag">肺水腫</span>
+            <span class="testi-card__tag" style="background:var(--teal);">腎臓病</span>
           </div>
           <div class="testi-card__body">
             <p class="testi-card__quote">
-              呼吸数がわずかに上昇し続けたため受診しましたが、聴診では「再発なし」。それでも数値が気になり後日レントゲンを撮ると、軽い肺水腫が判明。見た目も元気で、獣医師さえ気づかない段階で発見できました。
+              腎臓病進行により代謝が落ちたり活動性低下によって筋肉量が少なくなってきたのか、PetVoiceから推定直腸温が低いという通知が来ることが増えました。実際にバニラを見てみると体が震えていることが多いので、室温やブランケットをかけてあげたりしています。
             </p>
             <div class="testi-card__ba">
               <div class="ba-cell ba-before">
                 <div class="ba-cell__label">BEFORE</div>
-                <div class="ba-cell__text">外出のたびに心配で、出かけられなかった</div>
+                <div class="ba-cell__text">体の震えに気づいても原因がわからず不安だった</div>
               </div>
               <div class="ba-cell ba-after">
                 <div class="ba-cell__label">AFTER</div>
-                <div class="ba-cell__text">スマホで確認できるから安心して外出できる</div>
+                <div class="ba-cell__text">体温通知でその日の状態を把握。すぐに対応できる</div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
+      <!-- スライド3：がん（lp_cancer.html より） -->
       <div class="testi-slide">
         <div class="testi-card">
           <div class="testi-card__head">
             <div class="testi-card__avatar">
-              <img src="https://www.petvoice.co.jp/wp/wp-content/themes/PetVoice/lp-img/lp3/lives-saved/ls-suzu.png" alt="すずちゃん">
+              <img src="images/cancer_fuwamo.png" alt="ふわもちゃん">
             </div>
             <div class="testi-card__info">
-              <div class="testi-card__name">すずちゃん 3歳</div>
-              <div class="testi-card__sub">デボンレックス / 女の子</div>
+              <div class="testi-card__name">ふわもちゃん 2歳</div>
+              <div class="testi-card__sub">消化器型リンパ腫</div>
             </div>
-            <span class="testi-card__tag">先天性心疾患</span>
+            <span class="testi-card__tag" style="background:#c0392b;">がん</span>
           </div>
           <div class="testi-card__body">
             <p class="testi-card__quote">
-              急に動かなくなることが不安で、ずっとストップウォッチで呼吸数を測っていました。PetVoice導入後、自分で測った数値とアプリの数値がほぼ一致しており驚きました。外出中でも「いつも通りだな」と確認でき、張り詰めていた気持ちが楽になりました。
+              原因不明の体調不良から消化器型リンパ腫と診断。いつ息が止まるかと失う不安が強かったですが、PetVoiceで呼吸や心拍を確認でき胸を撫で下ろす日々でした。感覚的な「いつもと違う」という異変も、具体的な数字で獣医師へスムーズに伝えられ、適切な対応に繋がりました。
             </p>
             <div class="testi-card__ba">
               <div class="ba-cell ba-before">
                 <div class="ba-cell__label">BEFORE</div>
-                <div class="ba-cell__text">ストップウォッチで手動計測。精神的に限界だった</div>
+                <div class="ba-cell__text">いつ息が止まるかという不安で、目が離せなかった</div>
               </div>
               <div class="ba-cell ba-after">
                 <div class="ba-cell__label">AFTER</div>
-                <div class="ba-cell__text">自動で24時間記録。心に余裕が生まれた</div>
+                <div class="ba-cell__text">呼吸・心拍をスマホで確認。数値が獣医師との会話を変えた</div>
               </div>
             </div>
           </div>
@@ -1311,33 +1258,6 @@ body::before {
           ※補償プラン加入により500円/月が別途かかります<br>
           ※デバイスは完全レンタルです
         </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ════════════════════════════════
-  S8b : LINE + 紹介キャンペーン
-════════════════════════════════ -->
-<section class="s-line">
-  <div class="s-line__inner">
-    <p class="eyebrow" style="justify-content:center;">LINE公式アカウント</p>
-    <h2 class="s-line__heading">まずはLINEで<br>気軽に相談・情報収集</h2>
-    <p class="s-line__desc">購入前の疑問・使い方のコツ・健康管理のヒントをLINEでお届けします。登録は無料、いつでも退会できます。</p>
-    <a href="https://lin.ee/petvoice" class="btn-line" target="_blank">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;"><path d="M12 2C6.48 2 2 6.03 2 11c0 2.7 1.3 5.12 3.36 6.83L4.5 22l4.36-1.44C9.84 20.83 10.9 21 12 21c5.52 0 10-4.03 10-9S17.52 2 12 2zm0 16c-.92 0-1.82-.12-2.68-.34l-.48-.13-2.58.86.74-2.53-.33-.46C5.17 14.21 4 12.68 4 11c0-4.41 3.58-8 8-8s8 3.59 8 8-3.58 8-8 8z"/></svg>
-      LINE友だち追加（無料）
-    </a>
-
-    <!-- 紹介キャンペーン -->
-    <div class="referral-banner">
-      <div class="referral-banner__icon">
-        <span class="material-symbols-outlined icon-fill">card_giftcard</span>
-      </div>
-      <div class="referral-banner__body">
-        <p class="referral-banner__label">🎁 紹介キャンペーン実施中（5月1日〜）</p>
-        <p class="referral-banner__text">お友だちをご紹介いただくと、紹介者・被紹介者ともに<strong>1,000円分のギフト</strong>をプレゼント！</p>
       </div>
     </div>
   </div>
