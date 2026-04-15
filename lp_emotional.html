@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PetVoice — ペットの声を、聞いてあげてほしい。</title>
   <meta name="description" content="ペットは「苦しい」と言葉では言えない。PetVoiceは15の健康データで、ペットの声をあなたに届け続けます。">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -14,7 +13,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-
   <style>
 /* ════════════════════════════════════════
    RESET & MATERIAL SYMBOLS
@@ -32,7 +30,6 @@ a   { text-decoration: none; color: inherit; }
   -webkit-font-smoothing: antialiased;
 }
 .icon-fill { font-variation-settings: 'FILL' 1, 'wght' 400, 'OPSZ' 24, 'GRAD' 0; }
-
 /* ════════════════════════════════════════
    DESIGN TOKENS
 ════════════════════════════════════════ */
@@ -53,7 +50,6 @@ a   { text-decoration: none; color: inherit; }
   --r:           14px;
   --r-lg:        20px;
 }
-
 /* ════════════════════════════════════════
    APP WRAPPER  (480px phone on desktop)
 ════════════════════════════════════════ */
@@ -85,14 +81,11 @@ body::before {
     0 8px 32px rgba(0,0,0,.1),
     0 32px 80px rgba(0,0,0,.14);
 }
-
 /* ════════════════════════════════════════
    UTILITY
 ════════════════════════════════════════ */
 .pad { padding-left: var(--pad); padding-right: var(--pad); }
-/* Full-bleed: overrides section padding for images */
 .bleed { width: 100%; display: block; }
-
 .eyebrow {
   display: inline-flex; align-items: center; gap: 8px;
   font-size: 10px; font-weight: 700; letter-spacing: .2em;
@@ -107,7 +100,6 @@ body::before {
 .eyebrow--inv::before{ background: var(--amber); }
 .eyebrow--white      { color: rgba(255,255,255,.7); }
 .eyebrow--white::before { background: rgba(255,255,255,.5); }
-
 /* ── Buttons ── */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
@@ -133,7 +125,6 @@ body::before {
   font-size: 14px; padding: 14px 28px;
   border: 1.5px solid rgba(255,255,255,.35);
 }
-
 /* ════════════════════════════════════════
    STICKY HEADER
 ════════════════════════════════════════ */
@@ -153,7 +144,6 @@ body::before {
   padding: 9px 18px; border-radius: 50px;
   box-shadow: 0 4px 14px rgba(253,170,49,.4);
 }
-
 /* ════════════════════════════════════════
    S1 : HERO
 ════════════════════════════════════════ */
@@ -166,7 +156,6 @@ body::before {
   object-fit: cover; object-position: center 30%;
   display: block;
 }
-
 /* Device image floating in hero */
 .s-hero__device {
   position: absolute;
@@ -201,13 +190,20 @@ body::before {
   text-transform: uppercase;
   color: var(--teal); margin-bottom: 16px;
 }
+
+/* ─── HERO TITLE : 2行レイアウト調整 ─── */
 .s-hero__title {
-  font-size: 38px; font-weight: 900;
-  line-height: 1.22; letter-spacing: -.02em;
-  color: #fff; margin-bottom: 16px;
-  padding-right: 138px; /* leave room for device image */
+  font-size: clamp(26px, 7.5vw, 36px); /* レスポンシブ：375px→28px / 480px→36px */
+  font-weight: 900;
+  line-height: 1.28;
+  letter-spacing: -.02em;
+  color: #fff;
+  margin-bottom: 16px;
+  text-shadow: 0 2px 16px rgba(0,0,0,.45); /* デバイス画像との重なり対策 */
+  /* padding-right は削除：デバイス画像はヒーロー上部、タイトルはヒーロー下部のため不要 */
 }
 .s-hero__title em { font-style: normal; color: var(--amber); }
+
 .s-hero__sub {
   font-size: 13px; color: rgba(255,255,255,.75);
   line-height: 1.9; margin-bottom: 28px;
@@ -216,7 +212,6 @@ body::before {
   font-size: 10px; color: rgba(255,255,255,.5);
   margin-top: 10px; line-height: 1.7;
 }
-
 /* RTB Cards — overlap between hero and next section */
 .rtb-row {
   position: absolute; bottom: -52px;
@@ -248,13 +243,12 @@ body::before {
 .rtb-card__label {
   font-size: 9px; color: var(--text-2); line-height: 1.5;
 }
-
 /* ════════════════════════════════════════
    S2 : PROBLEM
 ════════════════════════════════════════ */
 .s-problem {
   background: var(--dark);
-  padding: 88px 0 48px; /* 52px for RTB overlap + 36px gap */
+  padding: 88px 0 48px;
 }
 .s-problem__photo {
   width: 100%; height: 220px;
@@ -298,7 +292,6 @@ body::before {
   font-size: 12px; color: rgba(255,255,255,.55);
   line-height: 1.85; font-style: italic;
 }
-
 /* ════════════════════════════════════════
    S3 : DISEASE (zig-zag cards)
 ════════════════════════════════════════ */
@@ -355,7 +348,6 @@ body::before {
   font-size: 13px; color: var(--text); line-height: 1.8;
 }
 .disease-card__insight strong { color: var(--amber-dk); }
-
 /* ════════════════════════════════════════
    S4 : STATS / BRIDGE
 ════════════════════════════════════════ */
@@ -388,7 +380,6 @@ body::before {
   margin-bottom: 6px; letter-spacing: -.02em;
 }
 .stat-cell__label { font-size: 10px; color: var(--text-2); line-height: 1.6; }
-/* Bridge photo — full bleed */
 .s-stats__bridge-photo {
   width: 100%; height: 180px;
   object-fit: cover; object-position: center;
@@ -404,7 +395,6 @@ body::before {
   line-height: 1.65; color: #fff;
 }
 .s-stats__quote-text span { color: var(--amber); }
-
 /* ════════════════════════════════════════
    S5 : PRODUCT
 ════════════════════════════════════════ */
@@ -414,7 +404,7 @@ body::before {
 }
 .s-product__inner { padding: 0 var(--pad); }
 .s-product__device-wrap {
-  position: relative; /* REQUIRED: contains absolutely-positioned children */
+  position: relative;
   background: linear-gradient(135deg, #c8f2f7, #e4f8fa);
   border-radius: var(--r-lg);
   margin-bottom: 28px;
@@ -475,9 +465,8 @@ body::before {
 }
 .product-patent .material-symbols-outlined { font-size: 18px; color: var(--teal); flex-shrink: 0; margin-top: 2px; }
 .product-patent__text { font-size: 12px; color: #555; line-height: 1.8; }
-
 /* ════════════════════════════════════════
-   S6 : FEATURES  (photo + overlapping card)
+   S6 : FEATURES
 ════════════════════════════════════════ */
 .s-features { background: var(--white); padding: 48px 0 0; }
 .s-features__header {
@@ -487,14 +476,12 @@ body::before {
   font-size: 26px; font-weight: 700;
   line-height: 1.45; color: var(--text);
 }
-/* Feature block layout */
 .feature-block { margin-bottom: 48px; }
 .feature-block__photo {
   width: 100%; height: 240px;
   object-fit: cover;
   display: block;
 }
-/* Text card overlaps photo by negative margin */
 .feature-block__card {
   position: relative;
   background: var(--white);
@@ -524,13 +511,9 @@ body::before {
 .feature-block--dark .feature-block__desc { color: rgba(255,255,255,.65); }
 .feature-block__desc strong { color: var(--text); font-weight: 700; }
 .feature-block--dark .feature-block__desc strong { color: #fff; }
-
-/* Feature 2 : dark card with teal stripe */
 .feature-block:nth-child(2) .feature-block__card {
   border-top: 3px solid var(--teal);
 }
-
-/* Stat pill inside feature card */
 .feature-stat-pill {
   display: inline-flex; align-items: center; gap: 8px;
   background: var(--teal-lt); border-radius: 50px;
@@ -538,7 +521,6 @@ body::before {
   font-size: 12px; font-weight: 700; color: var(--teal-dk);
 }
 .feature-stat-pill .material-symbols-outlined { font-size: 16px; }
-
 /* ════════════════════════════════════════
    S7 : TESTIMONIALS
 ════════════════════════════════════════ */
@@ -595,11 +577,9 @@ body::before {
 .ba-before .ba-cell__label { color: #bbb; }
 .ba-after  .ba-cell__label { color: var(--teal); }
 .ba-cell__text { font-size: 11px; color: #333; line-height: 1.6; }
-/* Slick dots */
 .testi-wrap .slick-dots { bottom: -38px; }
 .testi-wrap .slick-dots li button::before { color: var(--teal); font-size: 8px; }
 .testi-wrap .slick-dots li.slick-active button::before { color: var(--teal); }
-
 /* ════════════════════════════════════════
    S8 : PRICE
 ════════════════════════════════════════ */
@@ -611,7 +591,6 @@ body::before {
   margin-bottom: 8px;
 }
 .s-price__desc { font-size: 13px; color: var(--text-2); line-height: 1.9; }
-/* Dog photo above price card, full bleed */
 .s-price__photo {
   width: 100%; height: 260px;
   object-fit: cover; object-position: center 30%;
@@ -657,7 +636,6 @@ body::before {
   font-size: 18px; color: var(--teal); flex-shrink: 0; margin-top: 1px;
 }
 .price-note { text-align: center; font-size: 11px; color: #aaa; margin-top: 12px; line-height: 1.8; }
-
 /* ════════════════════════════════════════
    S9 : CLOSING CTA
 ════════════════════════════════════════ */
@@ -693,7 +671,6 @@ body::before {
   line-height: 1.9; margin-bottom: 28px;
 }
 .s-closing__note { font-size: 11px; color: rgba(255,255,255,.45); margin-top: 10px; }
-
 /* ════════════════════════════════════════
    STICKY FOOTER CTA
 ════════════════════════════════════════ */
@@ -721,12 +698,10 @@ body::before {
   box-shadow: 0 4px 16px rgba(253,170,49,.45);
 }
 .sticky-footer__btn .material-symbols-outlined { font-size: 15px; }
-
   </style>
 </head>
 <body>
 <div class="app-wrapper">
-
 <!-- ─────────── HEADER ─────────── -->
 <header class="site-header">
   <img
@@ -735,8 +710,6 @@ body::before {
     alt="PetVoice" class="site-header__logo">
   <a href="https://order.petvoice.co.jp/items" class="site-header__cta" target="_blank">今すぐ注文</a>
 </header>
-
-
 <!-- ════════════════════════════════
   S1 : HERO
 ════════════════════════════════ -->
@@ -746,19 +719,17 @@ body::before {
     src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=480&q=85"
     alt="愛犬" class="s-hero__photo">
   <div class="s-hero__overlay"></div>
-
   <!-- デバイス画像 -->
   <img
     src="https://www.petvoice.co.jp/wp/wp-content/themes/PetVoice/lp-img/lp3/smart-collar/sc-content.png"
     onerror="this.src='https://www.petvoice.co.jp/wp/wp-content/themes/PetVoice/lp-img/lp3/key-visual/kv.png'"
     alt="PetVoice スマートカラー"
     class="s-hero__device">
-
   <!-- テキスト -->
   <div class="s-hero__body">
     <p class="s-hero__eyebrow">PetVoice — Pet Health Monitor</p>
     <h1 class="s-hero__title">
-      「<em>苦しい</em>」を検知<br>ペット用スマート首輪
+      ペットの声を聞き続ける<br><em>スマート首輪</em>
     </h1>
     <p class="s-hero__sub">
       「なんか今日元気ないな」——でも、確かめる方法がなかった。<br>
@@ -770,7 +741,6 @@ body::before {
     </a>
     <p class="s-hero__cta-note">初回限定 初期費用50%オフ・1年間補償付き・最短3分で注文完了</p>
   </div>
-
   <!-- RTB Cards (overlap into next section) -->
   <div class="rtb-row">
     <div class="rtb-card">
@@ -796,8 +766,6 @@ body::before {
     </div>
   </div>
 </section>
-
-
 <!-- ════════════════════════════════
   S2 : PROBLEM
 ════════════════════════════════ -->
@@ -812,12 +780,10 @@ body::before {
       病気は、突然やってくるわけじゃない。最初は必ず、小さなサインがある。でも、ペットはそれを言葉にできない。だから気づいてあげられない——それが、一番つらい。
     </p>
   </div>
-
   <!-- Full-bleed photo -->
   <img
     src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=480&q=80"
     alt="心配そうな犬" class="s-problem__photo bleed">
-
   <div class="pad">
     <div class="problem-list">
       <div class="problem-item">
@@ -850,8 +816,6 @@ body::before {
     </div>
   </div>
 </section>
-
-
 <!-- ════════════════════════════════
   S3 : DISEASE
 ════════════════════════════════ -->
@@ -866,12 +830,10 @@ body::before {
       心臓病・腎臓病・がん——命を奪う病気ほど、発症よりずっと前から体はサインを出しています。
     </p>
   </div>
-
   <!-- Full-bleed photo -->
   <img
     src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=480&q=80"
     alt="犬と飼い主" class="s-disease__photo bleed">
-
   <div class="disease-cards">
     <div class="disease-card">
       <div class="disease-card__head">
@@ -887,7 +849,6 @@ body::before {
         </div>
       </div>
     </div>
-
     <div class="disease-card">
       <div class="disease-card__head">
         <span class="disease-card__rank">犬の死因 第2位</span>
@@ -902,7 +863,6 @@ body::before {
         </div>
       </div>
     </div>
-
     <div class="disease-card">
       <div class="disease-card__head">
         <span class="disease-card__rank disease-card__rank--gray">猫 第1位 / 犬 第3位</span>
@@ -919,8 +879,6 @@ body::before {
     </div>
   </div>
 </section>
-
-
 <!-- ════════════════════════════════
   S4 : STATS / BRIDGE
 ════════════════════════════════ -->
@@ -948,7 +906,6 @@ body::before {
       </div>
     </div>
   </div>
-
   <!-- Full-bleed photo bridge -->
   <img
     src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=480&q=80"
@@ -959,15 +916,12 @@ body::before {
     </p>
   </div>
 </section>
-
-
 <!-- ════════════════════════════════
   S5 : PRODUCT
 ════════════════════════════════ -->
 <section class="s-product">
   <div class="s-product__inner">
     <p class="eyebrow">The Solution</p>
-
     <!-- Device visual with dog photo as bg -->
     <div class="s-product__device-wrap">
       <img
@@ -981,13 +935,11 @@ body::before {
         <span class="material-symbols-outlined">science</span>特許取得
       </div>
     </div>
-
     <div class="s-product__name">PetVoice</div>
     <div class="s-product__tagline">スマート首輪型 ペット健康管理デバイス</div>
     <p class="s-product__lead">
       首輪を着けるだけ。<br>あとはPetVoiceが、休まず<br>ペットの体の声を届けます。
     </p>
-
     <div class="data-grid">
       <div class="data-cell">
         <div class="data-cell__icon"><span class="material-symbols-outlined">respiratory_rate</span></div>
@@ -1020,7 +972,6 @@ body::before {
         <div class="data-cell__note">腎臓のサイン</div>
       </div>
     </div>
-
     <div class="product-patent">
       <span class="material-symbols-outlined">verified_user</span>
       <p class="product-patent__text">
@@ -1029,8 +980,6 @@ body::before {
     </div>
   </div>
 </section>
-
-
 <!-- ════════════════════════════════
   S6 : FEATURES
 ════════════════════════════════ -->
@@ -1039,7 +988,6 @@ body::before {
     <p class="eyebrow" style="justify-content:center;">How It Works</p>
     <h2 class="s-features__heading">離れていても、<br>繋がっている。</h2>
   </div>
-
   <!-- Feature 1: light card overlapping photo -->
   <div class="feature-block">
     <img
@@ -1060,7 +1008,6 @@ body::before {
       </div>
     </div>
   </div>
-
   <!-- Feature 2: dark card overlapping photo -->
   <div class="feature-block feature-block--dark">
     <img
@@ -1082,8 +1029,6 @@ body::before {
     </div>
   </div>
 </section>
-
-
 <!-- ════════════════════════════════
   S7 : TESTIMONIALS
 ════════════════════════════════ -->
@@ -1093,10 +1038,8 @@ body::before {
     <h2 class="s-testi__heading">声が届いたから、<br>助けられた命がある。</h2>
     <p class="s-testi__sub">みんな最初は「大げさかな」と思っていた。でも、データが命を救った。</p>
   </div>
-
   <div class="testi-wrap">
     <div class="testi-slider">
-
       <!-- スライド1：心臓病 -->
       <div class="testi-slide">
         <div class="testi-card">
@@ -1127,8 +1070,7 @@ body::before {
           </div>
         </div>
       </div>
-
-      <!-- スライド2：腎臓病（lp_jinzo.html より） -->
+      <!-- スライド2：腎臓病 -->
       <div class="testi-slide">
         <div class="testi-card">
           <div class="testi-card__head">
@@ -1158,8 +1100,7 @@ body::before {
           </div>
         </div>
       </div>
-
-      <!-- スライド3：がん（lp_cancer.html より） -->
+      <!-- スライド3：がん -->
       <div class="testi-slide">
         <div class="testi-card">
           <div class="testi-card__head">
@@ -1189,12 +1130,9 @@ body::before {
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
-
-
 <!-- ════════════════════════════════
   S8 : PRICE
 ════════════════════════════════ -->
@@ -1204,12 +1142,10 @@ body::before {
     <h2 class="s-price__heading">今日から、<br>「気づいてあげられる」<br>飼い主になれる。</h2>
     <p class="s-price__desc">必要なものが全部セット。最短3分で注文完了。難しい設定は不要です。</p>
   </div>
-
   <!-- Full-bleed photo, price card overlaps -->
   <img
     src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=480&q=80"
     alt="笑顔の犬" class="s-price__photo bleed">
-
   <div class="price-card-wrap">
     <div class="price-card">
       <div class="price-card__top">
@@ -1262,8 +1198,6 @@ body::before {
     </div>
   </div>
 </section>
-
-
 <!-- ════════════════════════════════
   S9 : CLOSING CTA
 ════════════════════════════════ -->
@@ -1289,10 +1223,7 @@ body::before {
     <p class="s-closing__note">初回限定50%オフ・最短3分で注文完了</p>
   </div>
 </section>
-
 </div><!-- /.app-wrapper -->
-
-
 <!-- ════════════════════════════════
   STICKY FOOTER CTA
 ════════════════════════════════ -->
@@ -1306,8 +1237,6 @@ body::before {
     <span class="material-symbols-outlined">arrow_forward</span>
   </a>
 </div>
-
-
 <script>
 $(document).ready(function () {
   /* Testimonial carousel */
@@ -1321,7 +1250,6 @@ $(document).ready(function () {
     autoplaySpeed: 6000,
     speed: 500
   });
-
   /* Hide sticky footer while hero is in view */
   const footer = document.getElementById('sticky-footer');
   const hero = document.querySelector('.s-hero');
@@ -1335,6 +1263,5 @@ $(document).ready(function () {
   }
 });
 </script>
-
 </body>
 </html>
